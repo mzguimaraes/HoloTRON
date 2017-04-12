@@ -15,7 +15,7 @@ public class WallGrowOverTime : MonoBehaviour {
     void Start ()
     {
         startPos = transform.position;
-        startScale = transform.localScale.x;
+        startScale = transform.localScale.z;
 
         //lower until it hits floor 
         RaycastHit rch;
@@ -25,7 +25,6 @@ public class WallGrowOverTime : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log("OnTriggerEnter");
         if (col.gameObject.GetComponent<BoundingBoxWall>() != null)
         {
             hasHitBoundingBox = true;
@@ -37,8 +36,8 @@ public class WallGrowOverTime : MonoBehaviour {
         if (!hasHitBoundingBox)
         {
             float scaleIncreaseAmt = Time.deltaTime * growthRate;
-            transform.localScale = new Vector3(Mathf.MoveTowards(transform.localScale.x, Mathf.Infinity, scaleIncreaseAmt), transform.localScale.y, transform.localScale.z);
-            transform.position = startPos + transform.right * ((transform.localScale.x / 2) + (startScale / 2));
+            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, Mathf.MoveTowards(transform.localScale.z, Mathf.Infinity, scaleIncreaseAmt));
+            transform.position = startPos + transform.forward * ((transform.localScale.z / 2) + (startScale / 2));
         }
         
 	}
