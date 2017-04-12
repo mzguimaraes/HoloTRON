@@ -5,6 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 [RequireComponent (typeof(BoxCollider))]
 public class BoundingBoxWall : MonoBehaviour {
+    //TODO: make this scale relative to calibrated SteamVR bounding box size
 
     private BoxCollider col;
 
