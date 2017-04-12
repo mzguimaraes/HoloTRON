@@ -9,8 +9,14 @@ public class WallGrowOverTime : MonoBehaviour {
     
     private bool hasHitBoundingBox = false;
 
+    private Vector3 startPos;
+    private float startScale;
+
     void Start ()
     {
+        startPos = transform.position;
+        startScale = transform.localScale.x;
+
         //lower until it hits floor 
         RaycastHit rch;
         Physics.Raycast(transform.position, -transform.up, out rch);
@@ -31,8 +37,8 @@ public class WallGrowOverTime : MonoBehaviour {
         if (!hasHitBoundingBox)
         {
             float scaleIncreaseAmt = Time.deltaTime * growthRate;
-            transform.localScale += new Vector3(scaleIncreaseAmt, 0f, 0f);
-            transform.localPosition += new Vector3(scaleIncreaseAmt / 2, 0f, 0f);
+            transform.localScale = new Vector3(Mathf.MoveTowards(transform.localScale.x, Mathf.Infinity, scaleIncreaseAmt), transform.localScale.y, transform.localScale.z);
+            transform.position = startPos + transform.right * ((transform.localScale.x / 2) + (startScale / 2));
         }
         
 	}
