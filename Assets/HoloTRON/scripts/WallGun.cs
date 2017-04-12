@@ -10,7 +10,13 @@ public class WallGun : MonoBehaviour, IGlobalTriggerPressDownHandler {
 
     public void OnGlobalTriggerPressDown(VREventData eventData)
     {
-        Instantiate(wallPrefab, eventData.module.transform.position, Quaternion.Euler(eventData.module.transform.forward));
+
+        Vector3 goal = eventData.module.transform.forward;
+        goal = Vector3.ProjectOnPlane(goal, Vector3.up);
+
+        Quaternion rot = Quaternion.FromToRotation(Vector3.forward, goal);
+
+        Instantiate(wallPrefab, eventData.module.transform.position, eventData.module.transform.rotation);
     }
     
 }

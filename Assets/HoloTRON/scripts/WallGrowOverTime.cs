@@ -21,6 +21,15 @@ public class WallGrowOverTime : MonoBehaviour {
         RaycastHit rch;
         Physics.Raycast(transform.position, -transform.up, out rch);
         transform.position -= new Vector3(0f, rch.distance - transform.localScale.y / 2, 0f);
+
+        //right rotation so it goes forward along floor
+        //step 1: get desired forward vector by projecting current forward onto XZ-plane
+        Vector3 goal = transform.forward;
+        goal = Vector3.ProjectOnPlane(goal, Vector3.up);
+
+        //2: get rotation to goal and set rotation
+        Quaternion rot = Quaternion.FromToRotation(Vector3.forward, goal);
+        transform.rotation = rot;
     }
 
     void OnTriggerEnter(Collider col)
