@@ -14,9 +14,6 @@ public class WallGrowOverTime : MonoBehaviour {
 
     void Start ()
     {
-        startPos = transform.position;
-        startScale = transform.localScale.z;
-
         //lower until it hits floor 
         RaycastHit rch;
         Physics.Raycast(transform.position, -transform.up, out rch);
@@ -30,6 +27,9 @@ public class WallGrowOverTime : MonoBehaviour {
         //2: get rotation to goal and set rotation
         Quaternion rot = Quaternion.FromToRotation(Vector3.forward, goal);
         transform.rotation = rot;
+
+        startPos = transform.position;
+        startScale = transform.localScale.z;
     }
 
     void OnTriggerEnter(Collider col)
