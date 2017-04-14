@@ -18,12 +18,18 @@ public class WallGun : MonoBehaviour, IGlobalTriggerPressDownHandler {
         }
     }
 
+    void FireWall(Transform currTransform)
+    {
+        Instantiate(wallPrefab, currTransform.position, currTransform.rotation);
+        
+    }
+
     public void OnGlobalTriggerPressDown(VREventData eventData)
     {
         if (cdTimer <= 0f)
         {
             cdTimer = cooldown;
-            Instantiate(wallPrefab, eventData.module.transform.position, eventData.module.transform.rotation);
+            FireWall(eventData.module.transform);
         }
     }
     
