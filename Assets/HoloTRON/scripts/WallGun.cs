@@ -20,6 +20,7 @@ public class WallGun : MonoBehaviour, IGlobalTriggerPressDownHandler {
 
     void FireWall(Transform currTransform)
     {
+        //TODO: add haptic + visual feedback
         Instantiate(wallPrefab, currTransform.position, currTransform.rotation);
         
     }
